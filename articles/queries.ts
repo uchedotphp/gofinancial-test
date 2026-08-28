@@ -7,6 +7,7 @@ import type {
   ArticleId,
   ArticleListParams,
   ArticleListResult,
+  AuthorId,
   Comment,
   PlaceholderComment,
   Post,
@@ -63,6 +64,15 @@ export async function fetchArticleComments(
     params: { postId: articleId },
   });
   return response.data.map(commentToComment);
+}
+
+export async function fetchArticlesByAuthor(
+  authorId: AuthorId,
+): Promise<Article[]> {
+  const response = await api.get<Post[]>("/posts", {
+    params: { userId: authorId },
+  });
+  return response.data.map(postToArticle);
 }
 
 function matchesQuery(post: Post, q: string) {
