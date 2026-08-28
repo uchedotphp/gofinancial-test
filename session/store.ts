@@ -4,10 +4,12 @@ import type { Session } from "@/session/types";
 
 type SessionStore = {
   session: Session | null;
+  status: "pending" | "ready";
   setSession: (session: Session | null) => void;
 };
 
 export const useSessionStore = create<SessionStore>((set) => ({
   session: null,
-  setSession: (session) => set({ session }),
+  status: "pending",
+  setSession: (session) => set({ session, status: "ready" }),
 }));

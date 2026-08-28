@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { routes } from "@/lib/routes";
 import { useSessionStore } from "@/session/store";
 import { cn } from "@/utils/cn";
@@ -22,6 +23,7 @@ export function HeaderAuth({
 }: HeaderAuthProps) {
   const router = useRouter();
   const session = useSessionStore((state) => state.session);
+  const status = useSessionStore((state) => state.status);
   const setSession = useSessionStore((state) => state.setSession);
 
   async function handleSignOut() {
@@ -34,6 +36,15 @@ export function HeaderAuth({
     } catch {
       toast.error("Sign out failed. Please try again.");
     }
+  }
+
+  if (status === "pending") {
+    return (
+      <Skeleton
+        className={cn("mx-3 h-4 w-20", className)}
+        aria-hidden
+      />
+    );
   }
 
   if (session) {
