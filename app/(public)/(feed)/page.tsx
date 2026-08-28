@@ -10,6 +10,7 @@ import {
   type FeedSearchParams,
 } from "@/articles/feed-url";
 import { articleListQueryOptions } from "@/articles/queries";
+import { fetchAuthors } from "@/authors/queries";
 import { FeedPagination } from "@/components/pagination";
 import { getQueryClient } from "@/lib/query-client";
 
@@ -21,7 +22,13 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const params = parseFeedParams(await searchParams);
   const queryClient = getQueryClient();
   const options = articleListQueryOptions(params);
-  const data = await queryClient.query(options);
+  const [data, authors] = await Promise.all([
+    queryClient.query(options),
+    fetchAuthors(),
+  ]);
+  const authorNames = Object.fromEntries(
+    authors.map((author) => [author.id, author.name]),
+  );
 
   const pageLinks = getFeedPageLinks(params, data.pageCount);
   const prevHref =
@@ -48,7 +55,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <FeedArticleList params={params} />
+        <FeedArticleList params={params} authorNames={authorNames} />
       </HydrationBoundary>
 
       <FeedPagination

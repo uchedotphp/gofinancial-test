@@ -9,6 +9,7 @@ import {
 } from "@/articles/components/article-comments";
 import { fetchArticle } from "@/articles/queries";
 import type { ArticleId } from "@/articles/types";
+import { fetchAuthor } from "@/authors/queries";
 import { PageShell } from "@/components/page-shell";
 import { PageTitle } from "@/components/typography";
 import { routes } from "@/lib/routes";
@@ -59,8 +60,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  const author = await fetchAuthor(article.authorId);
   const authorHref = routes.author(article.authorId);
-  const authorLabel = `Author #${article.authorId}`;
+  const authorLabel = author?.name ?? `Author #${article.authorId}`;
 
   return (
     <PageShell narrow>
