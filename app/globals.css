@@ -10,6 +10,16 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-surface: var(--surface);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
 }
@@ -25,6 +35,16 @@
   --surface: #e3f6f5;
   --background: var(--paper);
   --foreground: var(--ink);
+
+  /* shadcn token bridge → Happy Hues */
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--accent);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --muted-foreground: var(--muted);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
 }
 
 .dark {
@@ -37,6 +57,15 @@
   --surface: #232536;
   --background: var(--paper);
   --foreground: var(--ink);
+
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--accent);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --muted-foreground: var(--muted);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
 }
 
 @layer base {
