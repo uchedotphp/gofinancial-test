@@ -1,11 +1,6 @@
 import { fetchArticleComments } from "@/articles/queries";
 import type { ArticleId } from "@/articles/types";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type CommentListItem = {

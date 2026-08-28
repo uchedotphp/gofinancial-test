@@ -10,7 +10,6 @@ export const routes = {
 export const primaryNav = [
   { href: routes.home, label: "Articles" },
   { href: routes.studio, label: "Studio" },
-  { href: routes.login, label: "Sign in" },
 ] as const;
 
 export const studioNav = [

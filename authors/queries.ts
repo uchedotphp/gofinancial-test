@@ -1,7 +1,6 @@
 import { isAxiosError } from "axios";
 
-import type { AuthorId } from "@/articles/types";
-import type { Author, PlaceholderUser } from "@/authors/types";
+import type { Author, AuthorId, PlaceholderUser } from "@/authors/types";
 import { api } from "@/lib/api/client";
 
 function userToAuthor(user: PlaceholderUser): Author {
