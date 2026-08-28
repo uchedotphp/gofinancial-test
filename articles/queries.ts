@@ -1,10 +1,14 @@
+import { isAxiosError } from "axios";
 import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
 import { DEFAULT_PAGE_SIZE, normalizeArticleListParams } from "@/articles/feed-url";
 import type {
   Article,
+  ArticleId,
   ArticleListParams,
   ArticleListResult,
+  Comment,
+  PlaceholderComment,
   Post,
 } from "@/articles/types";
 import { api } from "@/lib/api/client";
@@ -29,6 +33,36 @@ function postToArticle(post: Post): Article {
     title: post.title,
     body: post.body,
   };
+}
+
+function commentToComment(comment: PlaceholderComment): Comment {
+  return {
+    id: comment.id,
+    articleId: comment.postId,
+    name: comment.name,
+    body: comment.body,
+  };
+}
+
+export async function fetchArticle(id: ArticleId): Promise<Article | null> {
+  try {
+    const response = await api.get<Post>(`/posts/${id}`);
+    return postToArticle(response.data);
+  } catch (error) {
+    if (isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+export async function fetchArticleComments(
+  articleId: ArticleId,
+): Promise<Comment[]> {
+  const response = await api.get<PlaceholderComment[]>("/comments", {
+    params: { postId: articleId },
+  });
+  return response.data.map(commentToComment);
 }
 
 function matchesQuery(post: Post, q: string) {
