@@ -13,8 +13,8 @@ export type ArticleListItem = {
   title: string;
   body: string;
   href: string;
-  authorHref: string;
-  authorLabel: string;
+  authorHref?: string;
+  authorLabel?: string;
 };
 
 export type ArticleListParams = {
