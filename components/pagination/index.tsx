@@ -79,7 +79,7 @@ export function FeedPagination({
                     className={cn(
                       pageLinkClass,
                       item.page === page
-                        ? "text-accent border-accent -mb-px border-t-2 pt-[calc(0.875rem-2px)] font-medium"
+                        ? "text-accent border-accent -mb-px border-t-2 pt-3 font-medium"
                         : "text-muted hover:text-ink border-t-2 border-transparent",
                     )}
                   >
