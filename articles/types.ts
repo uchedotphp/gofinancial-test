@@ -32,10 +32,26 @@ export type ArticleListResult = {
   pageCount: number;
 };
 
+export type Comment = {
+  id: number;
+  articleId: ArticleId;
+  name: string;
+  body: string;
+};
+
 /** JSONPlaceholder post shape — stays behind the mapper in queries.ts. */
 export type Post = {
   userId: number;
   id: number;
   title: string;
+  body: string;
+};
+
+/** JSONPlaceholder comment — stays behind the mapper in queries.ts. */
+export type PlaceholderComment = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
   body: string;
 };
