@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "format": "prettier --write ."
   },
@@ -44,6 +45,10 @@
   },
   "packageManager": "pnpm@10.32.1",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0"
+    ],
+    "*.{json,css,md}": "prettier --write"
   }
 }
