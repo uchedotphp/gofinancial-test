@@ -32,15 +32,11 @@ function toListItems(
     body: article.body,
     href: routes.article(article.id),
     authorHref: routes.author(article.authorId),
-    authorLabel:
-      authorNames[article.authorId] ?? `Author #${article.authorId}`,
+    authorLabel: authorNames[article.authorId] ?? `Author #${article.authorId}`,
   }));
 }
 
-export function FeedArticleList({
-  params,
-  authorNames,
-}: FeedArticleListProps) {
+export function FeedArticleList({ params, authorNames }: FeedArticleListProps) {
   const { data, isError, isPending, isFetching, isPlaceholderData, refetch } =
     useQuery(articleListQueryOptions(params));
 
