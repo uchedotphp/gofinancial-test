@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import type { ArticleListItem } from "@/articles/types";
 import { Button } from "@/components/ui/button";
@@ -19,12 +20,14 @@ export type ArticleListViewProps = {
   items: ArticleListItem[];
   isUpdating?: boolean;
   updatingLabel?: string;
+  renderAction?: (article: ArticleListItem) => ReactNode;
 };
 
 export function ArticleListView({
   items,
   isUpdating = false,
   updatingLabel = "Updating…",
+  renderAction,
 }: ArticleListViewProps) {
   return (
     <div className="relative mt-10" aria-busy={isUpdating || undefined}>
@@ -41,41 +44,48 @@ export function ArticleListView({
           isUpdating && "opacity-50",
         )}
       >
-        {items.map((article) => (
-          <li key={article.id}>
-            <Card className="border-rule bg-surface hover:border-accent/40 gap-0 rounded-lg py-0 shadow-none transition-colors">
-              <CardHeader className="gap-0 px-5 pt-5 pb-0 sm:px-6 sm:pt-6">
-                <CardTitle className="text-ink font-serif text-xl font-normal text-balance sm:text-2xl">
-                  <Link href={article.href} className="hover:text-accent">
-                    {article.title}
-                  </Link>
-                </CardTitle>
-              </CardHeader>
-              <CardContent
-                className={cn(
-                  "text-muted px-5 pt-3 sm:px-6",
-                  article.authorHref && article.authorLabel
-                    ? "pb-0"
-                    : "pb-5 sm:pb-6",
-                )}
-              >
-                <p className="line-clamp-3 text-sm leading-relaxed sm:text-base">
-                  {article.body}
-                </p>
-              </CardContent>
-              {article.authorHref && article.authorLabel ? (
-                <CardFooter className="text-muted px-5 pt-4 pb-5 text-xs sm:px-6 sm:pb-6">
-                  <Link
-                    href={article.authorHref}
-                    className="hover:text-accent hover:underline"
-                  >
-                    {article.authorLabel}
-                  </Link>
-                </CardFooter>
-              ) : null}
-            </Card>
-          </li>
-        ))}
+        {items.map((article) => {
+          const action = renderAction?.(article);
+          const hasAuthor = Boolean(article.authorHref && article.authorLabel);
+          const hasFooter = hasAuthor || Boolean(action);
+
+          return (
+            <li key={article.id}>
+              <Card className="border-rule bg-surface hover:border-accent/40 gap-0 rounded-lg py-0 shadow-none transition-colors">
+                <CardHeader className="gap-0 px-5 pt-5 pb-0 sm:px-6 sm:pt-6">
+                  <CardTitle className="text-ink font-serif text-xl font-normal text-balance sm:text-2xl">
+                    <Link href={article.href} className="hover:text-accent">
+                      {article.title}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent
+                  className={cn(
+                    "text-muted px-5 pt-3 sm:px-6",
+                    hasFooter ? "pb-0" : "pb-5 sm:pb-6",
+                  )}
+                >
+                  <p className="line-clamp-3 text-sm leading-relaxed sm:text-base">
+                    {article.body}
+                  </p>
+                </CardContent>
+                {hasFooter ? (
+                  <CardFooter className="text-muted flex items-center justify-between gap-3 px-5 pt-4 pb-5 text-xs sm:px-6 sm:pb-6">
+                    {article.authorHref && article.authorLabel ? (
+                      <Link
+                        href={article.authorHref}
+                        className="hover:text-accent hover:underline"
+                      >
+                        {article.authorLabel}
+                      </Link>
+                    ) : null}
+                    {action ? <div className="ml-auto">{action}</div> : null}
+                  </CardFooter>
+                ) : null}
+              </Card>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
