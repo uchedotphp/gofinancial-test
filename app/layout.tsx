@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/header";
+import { QueryProvider } from "@/components/query-provider";
+import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -40,9 +41,11 @@ export default function RootLayout({
     >
       <body className="min-h-dvh font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <SiteHeader />
-          <main className="flex flex-1 flex-col">{children}</main>
-          <SiteFooter />
+          <QueryProvider>
+            <SiteHeader />
+            <main className="flex flex-1 flex-col">{children}</main>
+            <SiteFooter />
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
