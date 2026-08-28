@@ -51,19 +51,28 @@ export function ArticleListView({
                   </Link>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="text-muted px-5 pt-3 pb-0 sm:px-6">
+              <CardContent
+                className={cn(
+                  "text-muted px-5 pt-3 sm:px-6",
+                  article.authorHref && article.authorLabel
+                    ? "pb-0"
+                    : "pb-5 sm:pb-6",
+                )}
+              >
                 <p className="line-clamp-3 text-sm leading-relaxed sm:text-base">
                   {article.body}
                 </p>
               </CardContent>
-              <CardFooter className="text-muted px-5 pt-4 pb-5 text-xs sm:px-6 sm:pb-6">
-                <Link
-                  href={article.authorHref}
-                  className="hover:text-accent hover:underline"
-                >
-                  {article.authorLabel}
-                </Link>
-              </CardFooter>
+              {article.authorHref && article.authorLabel ? (
+                <CardFooter className="text-muted px-5 pt-4 pb-5 text-xs sm:px-6 sm:pb-6">
+                  <Link
+                    href={article.authorHref}
+                    className="hover:text-accent hover:underline"
+                  >
+                    {article.authorLabel}
+                  </Link>
+                </CardFooter>
+              ) : null}
             </Card>
           </li>
         ))}

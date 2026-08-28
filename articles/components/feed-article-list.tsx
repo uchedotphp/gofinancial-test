@@ -14,6 +14,7 @@ import { routes } from "@/lib/routes";
 
 type FeedArticleListProps = {
   params: ArticleListParams;
+  authorNames: Record<number, string>;
 };
 
 function toListItems(
@@ -23,6 +24,7 @@ function toListItems(
     body: string;
     authorId: number;
   }>,
+  authorNames: Record<number, string>,
 ) {
   return items.map((article) => ({
     id: article.id,
@@ -30,11 +32,15 @@ function toListItems(
     body: article.body,
     href: routes.article(article.id),
     authorHref: routes.author(article.authorId),
-    authorLabel: `Author #${article.authorId}`,
+    authorLabel:
+      authorNames[article.authorId] ?? `Author #${article.authorId}`,
   }));
 }
 
-export function FeedArticleList({ params }: FeedArticleListProps) {
+export function FeedArticleList({
+  params,
+  authorNames,
+}: FeedArticleListProps) {
   const { data, isError, isPending, isFetching, isPlaceholderData, refetch } =
     useQuery(articleListQueryOptions(params));
 
@@ -50,7 +56,7 @@ export function FeedArticleList({ params }: FeedArticleListProps) {
     return <ArticleListEmpty />;
   }
 
-  const items = toListItems(data.items);
+  const items = toListItems(data.items, authorNames);
 
   return (
     <ArticleListView
