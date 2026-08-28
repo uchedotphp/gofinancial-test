@@ -60,6 +60,14 @@ export async function fetchArticle(id: ArticleId): Promise<Article | null> {
   }
 }
 
+export function articleQueryOptions(id: ArticleId) {
+  return queryOptions({
+    queryKey: ["articles", "detail", id] as const,
+    queryFn: () => fetchArticle(id),
+    staleTime: 60_000,
+  });
+}
+
 export async function fetchArticleComments(
   articleId: ArticleId,
 ): Promise<Comment[]> {
