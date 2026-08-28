@@ -3,6 +3,7 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
+import { HeaderAuth } from "@/components/header/header-auth";
 import { Button } from "@/components/ui/button";
 import { primaryNav } from "@/lib/routes";
 import { cn } from "@/utils/cn";
@@ -85,6 +86,13 @@ function Panel({ open, onNavigate }: PanelProps) {
                 </Link>
               </li>
             ))}
+            <li className="px-3 py-2">
+              <HeaderAuth
+                className="flex-col items-start gap-1"
+                linkClassName="px-0"
+                onNavigate={onNavigate}
+              />
+            </li>
           </ul>
         </nav>
       </div>

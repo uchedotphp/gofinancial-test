@@ -1,7 +1,5 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import { FeedArticleList } from "@/articles/components/feed-article-list";
-import { FeedSearchBar } from "@/articles/components/feed-search-bar";
 import {
   FEED_PAGE_SIZE_OPTIONS,
   feedHref,
@@ -10,8 +8,11 @@ import {
   type FeedSearchParams,
 } from "@/articles/feed-url";
 import { articleListQueryOptions } from "@/articles/queries";
+import { fetchAuthors } from "@/authors/queries";
 import { FeedPagination } from "@/components/pagination";
 import { getQueryClient } from "@/lib/query-client";
+import { FeedArticleList } from "./_components/feed-article-list";
+import { FeedSearchBar } from "./_components/feed-search-bar";
 
 type HomePageProps = {
   searchParams: Promise<FeedSearchParams>;
@@ -21,13 +22,17 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const params = parseFeedParams(await searchParams);
   const queryClient = getQueryClient();
   const options = articleListQueryOptions(params);
-  const data = await queryClient.query(options);
+  const [data, authors] = await Promise.all([
+    queryClient.query(options),
+    fetchAuthors(),
+  ]);
+  const authorNames = Object.fromEntries(
+    authors.map((author) => [author.id, author.name]),
+  );
 
   const pageLinks = getFeedPageLinks(params, data.pageCount);
   const prevHref =
-    data.page > 1
-      ? feedHref({ ...params, page: data.page - 1 })
-      : undefined;
+    data.page > 1 ? feedHref({ ...params, page: data.page - 1 }) : undefined;
   const nextHref =
     data.page < data.pageCount
       ? feedHref({ ...params, page: data.page + 1 })
@@ -48,7 +53,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <FeedArticleList params={params} />
+        <FeedArticleList params={params} authorNames={authorNames} />
       </HydrationBoundary>
 
       <FeedPagination

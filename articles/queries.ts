@@ -1,12 +1,20 @@
+import { isAxiosError } from "axios";
 import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
-import { DEFAULT_PAGE_SIZE, normalizeArticleListParams } from "@/articles/feed-url";
+import {
+  DEFAULT_PAGE_SIZE,
+  normalizeArticleListParams,
+} from "@/articles/feed-url";
 import type {
   Article,
+  ArticleId,
   ArticleListParams,
   ArticleListResult,
+  Comment,
+  PlaceholderComment,
   Post,
 } from "@/articles/types";
+import type { AuthorId } from "@/authors/types";
 import { api } from "@/lib/api/client";
 
 function articleListKey(params: ArticleListParams) {
@@ -29,6 +37,53 @@ function postToArticle(post: Post): Article {
     title: post.title,
     body: post.body,
   };
+}
+
+function commentToComment(comment: PlaceholderComment): Comment {
+  return {
+    id: comment.id,
+    articleId: comment.postId,
+    name: comment.name,
+    body: comment.body,
+  };
+}
+
+export async function fetchArticle(id: ArticleId): Promise<Article | null> {
+  try {
+    const response = await api.get<Post>(`/posts/${id}`);
+    return postToArticle(response.data);
+  } catch (error) {
+    if (isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+export function articleQueryOptions(id: ArticleId) {
+  return queryOptions({
+    queryKey: ["articles", "detail", id] as const,
+    queryFn: () => fetchArticle(id),
+    staleTime: 60_000,
+  });
+}
+
+export async function fetchArticleComments(
+  articleId: ArticleId,
+): Promise<Comment[]> {
+  const response = await api.get<PlaceholderComment[]>("/comments", {
+    params: { postId: articleId },
+  });
+  return response.data.map(commentToComment);
+}
+
+export async function fetchArticlesByAuthor(
+  authorId: AuthorId,
+): Promise<Article[]> {
+  const response = await api.get<Post[]>("/posts", {
+    params: { userId: authorId },
+  });
+  return response.data.map(postToArticle);
 }
 
 function matchesQuery(post: Post, q: string) {

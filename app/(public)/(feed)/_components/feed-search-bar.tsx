@@ -1,36 +1,37 @@
 "use client";
 
-import { DEFAULT_PAGE_SIZE } from "@/articles/feed-url";
+import { useRouter } from "next/navigation";
+
+import { DEFAULT_PAGE_SIZE, feedHref } from "@/articles/feed-url";
+import type { ArticleListParams } from "@/articles/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-type FeedSearchFormProps = {
-  q?: string;
-  author?: number;
-  pageSize?: number;
-  onSubmit: (query: string) => void;
-  onClear: () => void;
-};
+type FeedSearchBarProps = Pick<ArticleListParams, "q" | "author" | "pageSize">;
 
-export function FeedSearchForm({
+export function FeedSearchBar({
   q = "",
   author,
   pageSize = DEFAULT_PAGE_SIZE,
-  onSubmit,
-  onClear,
-}: FeedSearchFormProps) {
+}: FeedSearchBarProps) {
+  const router = useRouter();
+
+  function go(nextQ?: string) {
+    router.push(feedHref({ q: nextQ, author, pageSize, page: 1 }));
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = String(
       new FormData(event.currentTarget).get("q") ?? "",
     ).trim();
-    onSubmit(value);
+    go(value || undefined);
   }
 
   function handleQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.value === "") {
-      onClear();
+      go(undefined);
     }
   }
 
