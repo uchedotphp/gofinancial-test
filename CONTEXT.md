@@ -28,4 +28,4 @@ The protected area for a Session.
 An Author’s saved pointer to an Article, stored on the device.
 
 **Feed Query**:
-The article list filters in the URL: `q`, `page`, and optional `author`.
+The article list filters in the URL: `q`, `page`, optional `author`, and optional `pageSize`.
