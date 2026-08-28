@@ -13,6 +13,10 @@ type ToggleProps = {
 };
 
 function Toggle({ open, onOpenChange }: ToggleProps) {
+  function handleClick() {
+    onOpenChange(!open);
+  }
+
   return (
     <Button
       variant="ghost"
@@ -20,7 +24,7 @@ function Toggle({ open, onOpenChange }: ToggleProps) {
       aria-expanded={open}
       aria-controls="mobile-nav"
       aria-label={open ? "Close menu" : "Open menu"}
-      onClick={() => onOpenChange(!open)}
+      onClick={handleClick}
     >
       <span className="relative size-5">
         <Menu
