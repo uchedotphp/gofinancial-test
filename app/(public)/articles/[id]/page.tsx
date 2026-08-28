@@ -6,6 +6,7 @@ import { cache, Suspense } from "react";
 import { fetchArticle } from "@/articles/queries";
 import type { ArticleId } from "@/articles/types";
 import { fetchAuthor } from "@/authors/queries";
+import { BookmarkButton } from "@/bookmarks/components/bookmark-button";
 import { PageShell } from "@/components/page-shell";
 import { PageTitle } from "@/components/typography";
 import { routes } from "@/lib/routes";
@@ -68,11 +69,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <PageShell narrow>
       <p className="text-muted text-sm">Article</p>
       <PageTitle className="mt-2 text-balance">{article.title}</PageTitle>
-      <p className="text-muted mt-4 text-sm">
-        <Link href={authorHref} className="hover:text-accent hover:underline">
-          {authorLabel}
-        </Link>
-      </p>
+      <div className="mt-4 flex items-center gap-1">
+        <p className="text-muted text-sm">
+          <Link href={authorHref} className="hover:text-accent hover:underline">
+            {authorLabel}
+          </Link>
+        </p>
+        <BookmarkButton articleId={article.id} />
+      </div>
       <div className="text-ink mt-8 text-base leading-relaxed whitespace-pre-wrap">
         {article.body}
       </div>
