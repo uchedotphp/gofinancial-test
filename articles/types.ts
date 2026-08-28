@@ -1,5 +1,6 @@
+import type { AuthorId } from "@/authors/types";
+
 export type ArticleId = number;
-export type AuthorId = number;
 
 export type Article = {
   id: ArticleId;

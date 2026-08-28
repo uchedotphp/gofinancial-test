@@ -1,4 +1,4 @@
-import type { AuthorId } from "@/articles/types";
+export type AuthorId = number;
 
 export type Author = {
   id: AuthorId;

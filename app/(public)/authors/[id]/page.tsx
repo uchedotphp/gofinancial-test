@@ -8,8 +8,8 @@ import {
   ArticleListView,
 } from "@/articles/components/article-list-view";
 import { fetchArticlesByAuthor } from "@/articles/queries";
-import type { AuthorId } from "@/articles/types";
 import { fetchAuthor } from "@/authors/queries";
+import type { AuthorId } from "@/authors/types";
 import { PageShell } from "@/components/page-shell";
 import { PageTitle } from "@/components/typography";
 import { routes } from "@/lib/routes";

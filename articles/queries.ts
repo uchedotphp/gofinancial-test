@@ -1,17 +1,20 @@
 import { isAxiosError } from "axios";
 import { keepPreviousData, queryOptions } from "@tanstack/react-query";
 
-import { DEFAULT_PAGE_SIZE, normalizeArticleListParams } from "@/articles/feed-url";
+import {
+  DEFAULT_PAGE_SIZE,
+  normalizeArticleListParams,
+} from "@/articles/feed-url";
 import type {
   Article,
   ArticleId,
   ArticleListParams,
   ArticleListResult,
-  AuthorId,
   Comment,
   PlaceholderComment,
   Post,
 } from "@/articles/types";
+import type { AuthorId } from "@/authors/types";
 import { api } from "@/lib/api/client";
 
 function articleListKey(params: ArticleListParams) {
