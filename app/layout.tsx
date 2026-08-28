@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 
-import { SiteHeader } from "@/components/header";
+import { SiteHeader } from "@/components/header/header";
 import { QueryProvider } from "@/components/query-provider";
 import { SiteFooter } from "@/components/site-footer";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -45,6 +46,7 @@ export default function RootLayout({
             <SiteHeader />
             <main className="flex flex-1 flex-col">{children}</main>
             <SiteFooter />
+            <Toaster richColors closeButton position="top-center" />
           </QueryProvider>
         </ThemeProvider>
       </body>
