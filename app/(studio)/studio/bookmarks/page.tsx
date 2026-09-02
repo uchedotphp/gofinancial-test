@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
+import { BookmarkList } from "@/bookmarks/components/bookmark-list";
 import { PageShell } from "@/components/page-shell";
 import { PageDescription, PageTitle } from "@/components/typography";
-import { BookmarkList } from "./_components/bookmark-list";
 
 export const metadata: Metadata = {
   title: "Bookmarks",

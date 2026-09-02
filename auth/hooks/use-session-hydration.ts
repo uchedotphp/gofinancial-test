@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import { useSessionStore } from "@/session/store";
+import { useSessionStore } from "@/auth/store";
 
 export function useSessionHydration() {
   const pathname = usePathname();

@@ -4,6 +4,7 @@ import { Bookmark } from "lucide-react";
 import { toast } from "sonner";
 
 import type { ArticleId } from "@/articles/types";
+import { useSessionStore } from "@/auth/store";
 import {
   useBookmarksHydrated,
   useBookmarksStore,
@@ -16,7 +17,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useSessionStore } from "@/session/store";
 import { cn } from "@/utils/cn";
 
 type BookmarkButtonProps = {
