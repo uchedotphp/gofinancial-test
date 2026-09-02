@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { getSession } from "@/auth/get-session";
+import { StudioNav } from "@/components/studio-nav";
 import { routes } from "@/lib/routes";
-import { getSession } from "@/session/get-session";
-import { StudioNav } from "./_components/studio-nav";
 
 export default async function StudioLayout({
   children,

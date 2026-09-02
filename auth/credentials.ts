@@ -1,9 +1,9 @@
+import { DEMO_PASSWORD } from "@/auth/constants";
+import { isStudioPath } from "@/auth/cookie";
+import type { Session } from "@/auth/types";
 import type { AuthorId } from "@/authors/types";
 import { api } from "@/lib/api/client";
-import { isStudioPath } from "@/lib/auth";
 import { routes } from "@/lib/routes";
-import { DEMO_PASSWORD } from "@/session/constants";
-import type { Session } from "@/session/types";
 
 type PlaceholderUserWithEmail = {
   id: number;

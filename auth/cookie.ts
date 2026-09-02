@@ -2,9 +2,9 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 
 import type { NextResponse } from "next/server";
 
+import { AUTH_FROM_COOKIE, SESSION_COOKIE } from "@/auth/constants";
+import type { Session } from "@/auth/types";
 import { routes } from "@/lib/routes";
-import { AUTH_FROM_COOKIE, SESSION_COOKIE } from "@/session/constants";
-import type { Session } from "@/session/types";
 
 export { SESSION_COOKIE };
 
