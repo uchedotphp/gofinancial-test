@@ -7,12 +7,12 @@ import {
   parseFeedParams,
   type FeedSearchParams,
 } from "@/articles/feed-url";
+import { FeedArticleList } from "@/articles/components/feed-article-list";
+import { FeedPagination } from "@/articles/components/feed-pagination";
+import { FeedSearchBar } from "@/articles/components/feed-search-bar";
 import { articleListQueryOptions } from "@/articles/queries";
 import { fetchAuthors } from "@/authors/queries";
-import { FeedPagination } from "@/components/pagination";
 import { getQueryClient } from "@/lib/query-client";
-import { FeedArticleList } from "./_components/feed-article-list";
-import { FeedSearchBar } from "./_components/feed-search-bar";
 
 type HomePageProps = {
   searchParams: Promise<FeedSearchParams>;
