@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { authFromCookieOptions, isStudioPath } from "@/lib/auth";
+import { AUTH_FROM_COOKIE, SESSION_COOKIE } from "@/auth/constants";
+import { authFromCookieOptions, isStudioPath } from "@/auth/cookie";
 import { routes } from "@/lib/routes";
-import { AUTH_FROM_COOKIE, SESSION_COOKIE } from "@/session/constants";
 
 export function proxy(request: NextRequest) {
   const hasSession = request.cookies.has(SESSION_COOKIE);

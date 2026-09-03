@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { Session } from "@/session/types";
+import type { Session } from "@/auth/types";
 
 type SessionStore = {
   session: Session | null;

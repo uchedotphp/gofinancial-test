@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { useSessionStore } from "@/auth/store";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { routes } from "@/lib/routes";
-import { useSessionStore } from "@/session/store";
 import { cn } from "@/utils/cn";
 
 type HeaderAuthProps = {
@@ -39,12 +39,7 @@ export function HeaderAuth({
   }
 
   if (status === "pending") {
-    return (
-      <Skeleton
-        className={cn("mx-3 h-4 w-20", className)}
-        aria-hidden
-      />
-    );
+    return <Skeleton className={cn("mx-3 h-4 w-20", className)} aria-hidden />;
   }
 
   if (session) {

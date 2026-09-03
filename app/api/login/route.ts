@@ -1,20 +1,17 @@
 import { NextResponse } from "next/server";
 
-import {
-  safeLoginRedirect,
-  verifyLoginCredentials,
-} from "@/app/(auth)/login/_lib/credentials";
-import {
-  loginFieldErrors,
-  loginSchema,
-  parseLoginFormData,
-} from "@/app/(auth)/login/_lib/login-schema";
+import { SESSION_COOKIE } from "@/auth/constants";
 import {
   clearAuthFromCookie,
   sessionCookieOptions,
   signSession,
-} from "@/lib/auth";
-import { SESSION_COOKIE } from "@/session/constants";
+} from "@/auth/cookie";
+import { safeLoginRedirect, verifyLoginCredentials } from "@/auth/credentials";
+import {
+  loginFieldErrors,
+  loginSchema,
+  parseLoginFormData,
+} from "@/auth/login-schema";
 
 export async function POST(request: Request) {
   const formData = await request.formData();

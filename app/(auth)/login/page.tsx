@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
+import { LoginForm } from "@/auth/components/login-form";
+import { AUTH_FROM_COOKIE } from "@/auth/constants";
 import { PageShell } from "@/components/page-shell";
 import { PageDescription, PageTitle } from "@/components/typography";
-import { AUTH_FROM_COOKIE } from "@/session/constants";
-import { LoginForm } from "./_components/login-form";
 
 export const metadata: Metadata = {
   title: "Sign in",
