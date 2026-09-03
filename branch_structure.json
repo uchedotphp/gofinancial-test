@@ -1,0 +1,39 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "dev",
+    "docs/readme",
+    "feat/article-detail-comments",
+    "feat/author-page",
+    "feat/session-auth",
+    "feat/studio",
+    "fix/session-header-flash",
+    "main",
+    "origin",
+    "refactor/domain-folders"
+  ],
+  "parent": {
+    "dev": "main",
+    "docs/readme": "main",
+    "feat/article-detail-comments": "main",
+    "feat/author-page": "main",
+    "feat/session-auth": "main",
+    "feat/studio": "main",
+    "fix/session-header-flash": "main",
+    "main": null,
+    "origin": "main",
+    "refactor/domain-folders": "main"
+  },
+  "order": [
+    "main",
+    "dev",
+    "docs/readme",
+    "feat/article-detail-comments",
+    "feat/author-page",
+    "feat/session-auth",
+    "feat/studio",
+    "fix/session-header-flash",
+    "origin",
+    "refactor/domain-folders"
+  ]
+}
