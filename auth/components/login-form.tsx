@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { routes } from "@/lib/routes";
-import { useSessionStore } from "@/session/store";
 import {
   loginFieldErrors,
   loginSchema,
   parseLoginFormData,
   type LoginFieldErrors,
-} from "../_lib/login-schema";
+} from "@/auth/login-schema";
+import { useSessionStore } from "@/auth/store";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { routes } from "@/lib/routes";
 
 type LoginFormProps = {
   from?: string;

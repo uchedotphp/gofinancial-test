@@ -3,6 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache, Suspense } from "react";
 
+import {
+  ArticleComments,
+  CommentListSkeleton,
+} from "@/articles/components/article-comments";
 import { fetchArticle } from "@/articles/queries";
 import type { ArticleId } from "@/articles/types";
 import { fetchAuthor } from "@/authors/queries";
@@ -10,10 +14,6 @@ import { BookmarkButton } from "@/bookmarks/components/bookmark-button";
 import { PageShell } from "@/components/page-shell";
 import { PageTitle } from "@/components/typography";
 import { routes } from "@/lib/routes";
-import {
-  ArticleComments,
-  CommentListSkeleton,
-} from "./_components/article-comments";
 
 type ArticlePageProps = {
   params: Promise<{ id: string }>;

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 
+import { PageSizeSelect } from "@/articles/components/page-size-select";
 import type { FeedPageLink } from "@/articles/feed-url";
-import { PageSizeSelect } from "@/components/pagination/page-size-select";
 import { cn } from "@/utils/cn";
 
 type FeedPaginationProps = {
@@ -91,7 +91,10 @@ export function FeedPagination({
           </ol>
 
           {nextHref ? (
-            <Link href={nextHref} className={cn(navLinkClass, "justify-self-end")}>
+            <Link
+              href={nextHref}
+              className={cn(navLinkClass, "justify-self-end")}
+            >
               <span className="hidden sm:inline">Next</span>
               <ChevronRight className="size-4" aria-hidden />
             </Link>
