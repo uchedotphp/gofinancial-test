@@ -8,11 +8,11 @@ import {
   ArticleListView,
 } from "@/articles/components/article-list-view";
 import { fetchArticlesByAuthor } from "@/articles/queries";
+import { getSession } from "@/auth/get-session";
 import type { AuthorId } from "@/authors/types";
 import { PageShell } from "@/components/page-shell";
 import { PageDescription, PageTitle } from "@/components/typography";
 import { routes } from "@/lib/routes";
-import { getSession } from "@/session/get-session";
 
 export const metadata: Metadata = {
   title: "My articles",

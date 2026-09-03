@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { verifySessionCookie } from "@/lib/auth";
-import { SESSION_COOKIE } from "@/session/constants";
+import { SESSION_COOKIE } from "@/auth/constants";
+import { verifySessionCookie } from "@/auth/cookie";
 
 export async function GET() {
   const cookieStore = await cookies();

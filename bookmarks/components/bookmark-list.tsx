@@ -8,6 +8,7 @@ import {
   ArticleListView,
 } from "@/articles/components/article-list-view";
 import { articleQueryOptions } from "@/articles/queries";
+import { useSessionStore } from "@/auth/store";
 import {
   useBookmarkIds,
   useBookmarksHydrated,
@@ -15,7 +16,6 @@ import {
 } from "@/bookmarks/store";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
-import { useSessionStore } from "@/session/store";
 
 export function BookmarkList() {
   const session = useSessionStore((state) => state.session);

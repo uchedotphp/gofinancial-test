@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { clearSessionCookie } from "@/lib/auth";
+import { clearSessionCookie } from "@/auth/cookie";
 
 export async function POST() {
   const response = NextResponse.json({ ok: true });

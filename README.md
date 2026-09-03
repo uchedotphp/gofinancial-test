@@ -53,12 +53,12 @@ Route files stay thin. Domain logic lives in feature folders at the repo root.
 
 ```
 app/            App Router: route groups, layouts, loading/error, API handlers
-articles/       Article types, queries, feed URL helpers, list UI
+articles/       Article types, queries, feed URL helpers, list/feed/comment UI
 authors/        Author types and fetches
-bookmarks/      Zustand store and bookmark button
-session/        Session types, server getter, client store
-lib/            Axios client, HMAC auth, routes, Query client
-components/     Shared shells, header, pagination, shadcn primitives
+bookmarks/      Zustand store, bookmark button, bookmark list
+auth/           Session types, cookie crypto, login form, client store
+lib/            Axios client, routes, Query client
+components/     Shared shells, header, studio nav, shadcn primitives
 proxy.ts        Edge route protection (Next.js 16 equivalent of middleware)
 ```
 
@@ -106,7 +106,7 @@ Defense in depth, not a single cookie check.
 
 ### Auth
 
-Demo credentials are checked against JSONPlaceholder `/users` (email match, password `demo`). The session is an HMAC-SHA256 signed cookie (`authorId:name`), `httpOnly`, `sameSite: lax` — see [`lib/auth.ts`](lib/auth.ts). The client Zustand store is a hydration mirror via `GET /api/session`.
+Demo credentials are checked against JSONPlaceholder `/users` (email match, password `demo`). The session is an HMAC-SHA256 signed cookie (`authorId:name`), `httpOnly`, `sameSite: lax` — see [`auth/cookie.ts`](auth/cookie.ts). The client Zustand store is a hydration mirror via `GET /api/session`.
 
 ### Data layer
 

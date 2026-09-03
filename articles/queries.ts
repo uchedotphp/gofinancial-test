@@ -64,7 +64,6 @@ export function articleQueryOptions(id: ArticleId) {
   return queryOptions({
     queryKey: ["articles", "detail", id] as const,
     queryFn: () => fetchArticle(id),
-    staleTime: 60_000,
   });
 }
 
@@ -148,7 +147,6 @@ export function articleListQueryOptions(params: ArticleListParams) {
   return queryOptions({
     queryKey: articleListKey(normalized),
     queryFn: () => fetchArticleList(normalized),
-    staleTime: 60_000,
     placeholderData: keepPreviousData,
   });
 }

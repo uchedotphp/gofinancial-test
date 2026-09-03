@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import { useSessionHydration } from "@/auth/hooks/use-session-hydration";
 import { HeaderAuth } from "@/components/header/header-auth";
 import { MobileMenu } from "@/components/header/mobile-menu";
 import { ThemeToggle } from "@/components/header/theme-toggle";
 import { primaryNav, routes } from "@/lib/routes";
-import { useSessionHydration } from "@/components/header/use-session-hydration";
 import { cn } from "@/utils/cn";
 
 export function SiteHeader() {
